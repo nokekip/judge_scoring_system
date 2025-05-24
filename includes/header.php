@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * Header Template
  * Contains HTML head and navigation
