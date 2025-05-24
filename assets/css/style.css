@@ -438,3 +438,72 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Judge Portal Specific Styles */
+.participant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.participant-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+}
+
+.participant-card.unscored {
+    border-left: 4px solid #28a745; /* Green border for unscored */
+    background-color: rgba(40, 167, 69, 0.05);
+}
+
+.participant-card.scored {
+    opacity: 0.8;
+}
+   
+
+.participant-info {
+    flex-grow: 1;
+}
+
+.participant-actions {
+    margin-top: 1rem;
+}
+
+.existing-score {
+    margin-top: 0.5rem;
+}
+
+.badge {
+    display: inline-block;
+    background: #e9ecef;
+    color: #495057;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+.badge-new {
+    background-color: #28a745;
+    color: white;
+}
+
+.new-score-indicator {
+    margin-top: 0.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
