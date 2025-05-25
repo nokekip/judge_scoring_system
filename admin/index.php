@@ -17,7 +17,7 @@ $users = getAllUsers();
             <div class="stat-card">
                 <div class="stat-number"><?= count($judges) ?></div>
                 <div class="stat-label">Total Judges</div>
-                <a href="add_judge.php" class="btn btn-primary mt-2">Add Judge</a>
+                <a href="manage_judges.php" class="btn btn-primary mt-2">Manage Judges</a>
             </div>
             
             <div class="stat-card">

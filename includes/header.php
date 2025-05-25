@@ -8,6 +8,7 @@ session_start();
 // Get the current page for navigation highlighting
 $current_page = basename($_SERVER['PHP_SELF']);
 $page_title = $page_title ?? 'Scoring System';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +50,8 @@ $page_title = $page_title ?? 'Scoring System';
     <!-- Meta tags -->
     <meta name="description" content="LAMP Stack Scoring System for Judge-based Competitions">
     <meta name="author" content="Your Name">
+
+    <script src="/../assets/js/modal.js"></script>
 </head>
 <body>
     <header class="main-header">
