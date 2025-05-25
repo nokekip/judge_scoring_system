@@ -19,6 +19,7 @@ if (isset($_GET['delete'])) {
 }
 
 // Handle form submission
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = sanitizeInput($_POST['username']);
     $display_name = sanitizeInput($_POST['display_name']);
@@ -29,12 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (judgeUsernameExists($username)) {
         $message = errorMessage('Username already exists');
     } else {
-        if (addJudge($username, $display_name, $email)) {
+        $result = addJudge($username, $display_name, $email);
+        if ($result === true) {
             $_SESSION['message'] = successMessage('Judge added successfully!');
             header('Location: manage_judges.php');
             exit;
         } else {
-            $message = errorMessage('Failed to add judge');
+            $message = errorMessage($result);
         }
     }
 }

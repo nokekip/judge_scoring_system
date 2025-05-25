@@ -19,6 +19,37 @@ function sanitizeInput($data) {
 }
 
 /**
+ * Check if email exists in either users or judges tables
+ * @param string $email
+ * @return bool
+ */
+function emailExists($email) {
+    try {
+        $pdo = getDbConnection();
+        
+        // Check in users table
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $usersCount = $stmt->fetchColumn();
+        
+        // Check in judges table
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM judges WHERE email = ?");
+        $stmt->execute([$email]);
+        $judgesCount = $stmt->fetchColumn();
+        
+        if ($usersCount > 0) {
+            return "participant";
+        } elseif ($judgesCount > 0) {
+            return "judge";
+        }
+        return false;
+    } catch (Exception $e) {
+        error_log("Error checking email: " . $e->getMessage());
+        return false;
+    }
+}
+
+/**
  * Validate email format
  * @param string $email
  * @return bool
@@ -64,17 +95,31 @@ function getAllJudges() {
  * @param string $username
  * @param string $displayName
  * @param string $email
- * @return bool
+ * @return bool|string Returns true on success, error message on failure
  */
 function addJudge($username, $displayName, $email = '') {
     try {
+        // Validate email if provided
+        if (!empty($email)) {
+            if (!validateEmail($email)) {
+                return "Invalid email format";
+            }
+            $emailExists = emailExists($email);
+            if ($emailExists === "judge") {
+                return "This email is already registered as a judge";
+            } elseif ($emailExists === "participant") {
+                return "This email is already registered as a participant";
+            }
+        }
+
         $pdo = getDbConnection();
         $stmt = $pdo->prepare("INSERT INTO judges (username, display_name, email) VALUES (?, ?, ?)");
-        return $stmt->execute([$username, $displayName, $email]);
-    }
-    catch (Exception $e) {
+        $success = $stmt->execute([$username, $displayName, $email]);
+        
+        return $success ? true : "Failed to add judge";
+    } catch (Exception $e) {
         error_log("Error adding judge: " . $e->getMessage());
-        return false;
+        return "Database error occurred";
     }
 }
 
@@ -83,16 +128,31 @@ function addJudge($username, $displayName, $email = '') {
  * @param string $username
  * @param string $displayName
  * @param string $email
- * @return bool
+ * @return bool|string Returns true on success, error message on failure
  */
 function addUser($username, $displayName, $email = '') {
     try {
+        // Validate email if provided
+        if (!empty($email)) {
+            if (!validateEmail($email)) {
+                return "Invalid email format";
+            }
+            $emailExists = emailExists($email);
+            if ($emailExists === "judge") {
+                return "This email is already registered as a judge";
+            } elseif ($emailExists === "participant") {
+                return "This email is already registered as a participant";
+            }
+        }
+
         $pdo = getDbConnection();
         $stmt = $pdo->prepare("INSERT INTO users (username, display_name, email) VALUES (?, ?, ?)");
-        return $stmt->execute([$username, $displayName, $email]);
+        $success = $stmt->execute([$username, $displayName, $email]);
+        
+        return $success ? true : "Failed to add user";
     } catch (Exception $e) {
         error_log("Error adding user: " . $e->getMessage());
-        return false;
+        return "Database error occurred";
     }
 }
 

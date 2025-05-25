@@ -137,3 +137,33 @@ class ModalSystem {
 document.addEventListener('DOMContentLoaded', () => {
     window.modalSystem = new ModalSystem(); // Make available globally if needed
 });
+
+// Validate email on form submission
+async function validateEmailOnSubmit(form) {
+    const emailInput = form.querySelector('[name="email"]');
+    if (!emailInput || !emailInput.value) return true; // Skip if email is empty
+    
+    try {
+        const response = await fetch('/scoring_system/includes/check_email.php?email=' + encodeURIComponent(emailInput.value));
+        const data = await response.json();
+        
+        if (data.exists) {
+            alert(`This email is already registered as a ${data.type}`);
+            emailInput.focus();
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error('Validation error:', error);
+        return true; // Proceed if validation fails
+    }
+}
+
+// Modify form submission in modal.js
+document.querySelectorAll('dialog form').forEach(form => {
+    form.addEventListener('submit', async (e) => {
+        if (!await validateEmailOnSubmit(form)) {
+            e.preventDefault();
+        }
+    });
+})

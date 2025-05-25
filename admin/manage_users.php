@@ -12,14 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
     $email = sanitizeInput($_POST['email']);
 
     if (empty($username) || empty($display_name)) {
-        $_SESSION['message'] = '<div class="alert alert-error">Username and display name are required</div>';
+        $_SESSION['message'] = errorMessage('Username and display name are required');
     } elseif (userUsernameExists($username)) {
-        $_SESSION['message'] = '<div class="alert alert-error">Username already exists</div>';
+        $_SESSION['message'] = errorMessage('Username already exists');
     } else {
-        if (addUser($username, $display_name, $email)) {
-            $_SESSION['message'] = '<div class="alert alert-success">Participant added successfully!</div>';
+        $result = addUser($username, $display_name, $email);
+        if ($result === true) {
+            $_SESSION['message'] = successMessage('Participant added successfully!');
         } else {
-            $_SESSION['message'] = '<div class="alert alert-error">Failed to add participant</div>';
+            $_SESSION['message'] = errorMessage($result); // $result contains the error message
         }
     }
     
