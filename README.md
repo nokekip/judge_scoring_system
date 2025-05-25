@@ -78,7 +78,7 @@ scoring_system/
 ### 1. Clone/Download the Project
 ```bash
 # If using Git
-git clone [https://github.com/nokekip/scoring_system.git]
+git clone https://github.com/nokekip/scoring_system.git
 cd scoring_system
 
 # Or extract the ZIP file to your web server directory
