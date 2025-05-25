@@ -1,0 +1,57 @@
+/* ===== ADMIN PANEL LAYOUT ===== */
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== STATS CARDS ===== */
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-left: 4px solid #667eea;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== ADMIN TABLES ===== */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    background-color: #f1f3f5;
+    position: sticky;
+    top: 0;
+}
+
+/* ===== ADMIN FORMS ===== */
+.admin-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* ===== USER MANAGEMENT ===== */
+.user-actions {
+    display: flex;
+    gap: 0.5rem;
+}

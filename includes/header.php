@@ -16,8 +16,26 @@ $page_title = $page_title ?? 'Scoring System';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($page_title); ?> - LAMP Scoring System</title>
     
-    <!-- CSS -->
+    <!-- Core CSS -->
     <link rel="stylesheet" href="/scoring_system/assets/css/style.css">
+
+    <!-- Page-Specific CSS -->
+    <?php
+    $page = basename($_SERVER['PHP_SELF']);
+    $page_path_parts = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+
+    if (in_array('judge', $page_path_parts)) {
+        echo '<link rel="stylesheet" href="/scoring_system/assets/css/judge-portal.css">';
+    } elseif (in_array('admin', $page_path_parts)) {
+        echo '<link rel="stylesheet" href="/scoring_system/assets/css/admin.css">';
+    } elseif ($page === 'scoreboard.php') {
+        echo '<link rel="stylesheet" href="/scoring_system/assets/css/scoreboard.css">';
+    }
+
+    if ($page === 'submit_score.php') {
+        echo '<link rel="stylesheet" href="/scoring_system/assets/css/judge-portal.css">';
+    }
+    ?>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/scoring_system/assets/images/favicon.ico">

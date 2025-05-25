@@ -1,0 +1,88 @@
+/* ===== JUDGE PORTAL LAYOUT ===== */
+.judge-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ===== PARTICIPANT GRID ===== */
+.participant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.participant-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.participant-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.participant-card.unscored {
+    border-left: 4px solid #28a745;
+    background-color: rgba(40, 167, 69, 0.05);
+}
+
+.participant-card.scored {
+    opacity: 0.8;
+}
+
+.participant-info {
+    flex-grow: 1;
+}
+
+.participant-actions {
+    margin-top: 1rem;
+}
+
+/* ===== JUDGE SCORING FORM ===== */
+.judge-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===== BADGES & INDICATORS ===== */
+.badge {
+    display: inline-block;
+    background: #e9ecef;
+    color: #495057;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.badge-new {
+    background-color: #28a745;
+    color: white;
+}
+
+.existing-score {
+    margin-top: 0.5rem;
+}
+
+.new-score-indicator {
+    margin-top: 0.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* ===== JUDGE BUTTONS ===== */
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}

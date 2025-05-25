@@ -1,0 +1,92 @@
+/* ===== SCOREBOARD COMPONENTS ===== */
+.scoreboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.last-updated {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.auto-refresh-status {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* ===== RANKING STYLES ===== */
+.scoreboard-rank {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.rank-1 { background-color: #ffd700; color: #000; }
+.rank-2 { background-color: #c0c0c0; color: #000; }
+.rank-3 { background-color: #cd7f32; color: #000; }
+
+.top-rank {
+    font-weight: 500;
+}
+
+.top-rank.top-1 { background-color: rgba(255, 215, 0, 0.1); }
+.top-rank.top-2 { background-color: rgba(192, 192, 192, 0.1); }
+.top-rank.top-3 { background-color: rgba(205, 127, 50, 0.1); }
+
+.points-display {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* ===== MEDAL ICONS ===== */
+.top-rank td:first-child::before {
+    content: "";
+    display: inline-block;
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.top-rank.top-1 td:first-child::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffd700"><path d="M12 2L8 7h3v13h2V7h3m2 0h3l-5-5-5 5h3v13h2V7z"/></svg>');
+}
+
+.top-rank.top-2 td:first-child::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23c0c0c0"><path d="M12 2L8 7h3v13h2V7h3m2 0h3l-5-5-5 5h3v13h2V7z"/></svg>');
+}
+
+.top-rank.top-3 td:first-child::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23cd7f32"><path d="M12 2L8 7h3v13h2V7h3m2 0h3l-5-5-5 5h3v13h2V7z"/></svg>');
+}
+
+/* ===== SCOREBOARD MOBILE ===== */
+@media (max-width: 768px) {
+    .scoreboard-table thead { display: none; }
+    .scoreboard-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #e9ecef;
+        border-radius: 5px;
+    }
+    .scoreboard-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+    }
+    .scoreboard-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+}
