@@ -285,4 +285,20 @@ function userUsernameExists($username) {
         return false;
     }
 }
+
+/**
+ * Delete a judge
+ * @param int $judge_id
+ * @return bool
+ */
+function deleteJudge($judge_id) {
+    try {
+        $pdo = getDbConnection();
+        $stmt = $pdo->prepare("DELETE FROM judges WHERE id = ?");
+        return $stmt->execute([$judge_id]);
+    } catch (Exception $e) {
+        error_log("Error deleting judge: " . $e->getMessage());
+        return false;
+    }
+}
 ?>
