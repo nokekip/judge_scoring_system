@@ -21,20 +21,26 @@ $page_title = $page_title ?? 'Scoring System';
 
     <!-- Page-Specific CSS -->
     <?php
-    $page = basename($_SERVER['PHP_SELF']);
-    $page_path_parts = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+    $current_path = $_SERVER['REQUEST_URI'];
+    $base_url = '/scoring_system';
 
-    if (in_array('judge', $page_path_parts)) {
-        echo '<link rel="stylesheet" href="/scoring_system/assets/css/judge-portal.css">';
-    } elseif (in_array('admin', $page_path_parts)) {
-        echo '<link rel="stylesheet" href="/scoring_system/assets/css/admin.css">';
-    } elseif ($page === 'scoreboard.php') {
-        echo '<link rel="stylesheet" href="/scoring_system/assets/css/scoreboard.css">';
+    // Determine which additional CSS to load
+    if (strpos($current_path, '/judge/') !== false) {
+        // All judge portal pages
+        echo '<link rel="stylesheet" href="'.$base_url.'/assets/css/judge-portal.css">';
+    } elseif (strpos($current_path, '/admin/') !== false) {
+        // All admin pages
+        echo '<link rel="stylesheet" href="'.$base_url.'/assets/css/admin.css">';
+    } elseif (basename($_SERVER['PHP_SELF']) === 'scoreboard.php') {
+        // Public scoreboard
+        echo '<link rel="stylesheet" href="'.$base_url.'/assets/css/scoreboard.css">';
+    } elseif (basename($_SERVER['PHP_SELF']) === 'index.php' && strpos($current_path, '/public/') !== false) {
+        // Only the public homepage (not admin/judge index.php)
+        echo '<link rel="stylesheet" href="'.$base_url.'/assets/css/home.css">';
     }
 
-    if ($page === 'submit_score.php') {
-        echo '<link rel="stylesheet" href="/scoring_system/assets/css/judge-portal.css">';
-    }
+    // Debug output (remove in production)
+    echo '<!-- Loading: '.htmlspecialchars(basename($_SERVER['PHP_SELF'])).' from '.htmlspecialchars($current_path).' -->';
     ?>
     
     <!-- Favicon -->

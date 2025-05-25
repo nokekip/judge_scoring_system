@@ -5,7 +5,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>LAMP Scoring System</h3>
+                    <h3>Judge Scoring System</h3>
                     <p>A comprehensive scoring platform built with Linux, Apache, MySQL, and PHP.</p>
                 </div>
                 
@@ -35,7 +35,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> Scoring System. Built for Technical Interview Challenge.</p>
+                <p>&copy; <?php echo date('Y'); ?> Scoring System. Built by <a href="">@nokekip</a></p>
                 <p class="tech-stack">
                     <span class="tech-badge">Linux</span>
                     <span class="tech-badge">Apache</span>
